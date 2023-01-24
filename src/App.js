@@ -1,14 +1,12 @@
-
+import ListPage from "./pages/ListPage"
+import WritePage from "./pages/WritePage"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header"> 
-        <p>
-        React
-        </p> 
-      </header>
-    </div>
+    <>
+      <WritePage />
+      <ListPage />
+    </>
   );
 }
 
