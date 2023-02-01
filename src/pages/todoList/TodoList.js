@@ -1,33 +1,43 @@
 import { useRef, useState } from "react";
+import NewTodoForm from "./NewTodoForm";
+
+function useTodosState() {
+  const [todos, setTodos] = useState([]);
+  const lastTodoIdRef = useRef(0);
+
+  const addTodo = (newContent) => {
+    const id = ++lastTodoIdRef.current;
+    const newTodo = {
+      id,
+      content: newContent,
+      regDate: "2023-02-02 09:00:00",
+    };
+
+    setTodos([...todos, newTodo]);
+  };
+  const modifyTodo = () => {
+    alert("수정");
+  };
+  const removeTodo = (index) => {
+    alert("삭제");
+  };
+  return { todos, addTodo, modifyTodo, removeTodo };
+}
 
 function TodoList() {
-  const [todo, setTodo] = useState([]);
-  const submit = (e) => {
-    e.preventDefault();
-    
-    let form = e.target;
-    form.content.value = form.content.value.trim(); 
-
-    if (form.content.value.length === 0) {
-      alert("할일을 입력해주세요");
-      return;
-    }
-    
-    setTodo([...todo, form.content.value]);
-    form.content.value = "";
-    form.content.focus();
-  }
-
+  const todosState = useTodosState();
   return (
     <>
-      <h1>작성 페이지</h1>
-      <form onSubmit={submit}> 
-        <input type="text" id="content" placeholder="할일을 입력해주세요."/>
-        <button type="submit" >작성</button>
-      </form>
+      <h1>TODOLIST</h1>
+      <NewTodoForm todosState={todosState} />
       <div className="mt-8">
-        {todo.map((e, i) => (<div key={i} className="flex gap-2"><div>{e}</div><span>2023-02-02 09:00:00</span></div>))}
-        </div>
+        {todosState.todos.map((e, i) => (
+          <div key={i} className="flex gap-2">
+            <div>{e.content}</div>
+            <span>{e.regDate}</span>
+          </div>
+        ))}
+      </div>
     </>
   );
 }
