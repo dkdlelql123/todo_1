@@ -19,7 +19,8 @@ function useTodosState() {
     alert("수정");
   };
   const removeTodo = (index) => {
-    alert("삭제");
+    const newTodos = todos.filter((e, i) => i !== index);
+    setTodos(newTodos);
   };
   return { todos, addTodo, modifyTodo, removeTodo };
 }
@@ -35,6 +36,7 @@ function TodoList() {
           <div key={i} className="flex gap-2">
             <div>{e.content}</div>
             <span>{e.regDate}</span>
+            <span onClick={() => todosState.removeTodo(i)}>삭제</span>
           </div>
         ))}
       </div>
