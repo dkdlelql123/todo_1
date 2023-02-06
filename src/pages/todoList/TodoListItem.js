@@ -14,6 +14,7 @@ function TodoListItem({ todo, index, todosState }) {
   };
 
   const editCancle = () => {
+    setEditContent(todo.content);
     setEditMode(false);
   };
 
