@@ -13,12 +13,18 @@ function useTodosState() {
       id,
       content: newContent,
       regDate: dateToStr(new Date()),
+      updateDate: "",
     };
 
     setTodos([...todos, newTodo]);
   };
-  const modifyTodo = () => {
-    alert("수정");
+  const modifyTodo = (index, newContent) => {
+    const newTodos = todos.map((todo, i) =>
+      i !== index
+        ? todo
+        : { ...todo, content: newContent, updateDate: dateToStr(new Date()) }
+    );
+    setTodos(newTodos);
   };
   const removeTodo = (index) => {
     const newTodos = todos.filter((e, i) => i !== index);

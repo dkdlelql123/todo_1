@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
   const [editContent, setEditContent] = useState(todo.content);
+  const editContentInputRef = useRef(null);
 
   const onClickRemoveItem = () => todosState.removeTodo(index);
   const onClickModifyItem = () => {
@@ -10,6 +11,12 @@ function TodoListItem({ todo, index, todosState }) {
   };
 
   const editSuccess = () => {
+    if (editContent.trim().length === 0) {
+      alert("할일을 입력해주세요");
+      return;
+    }
+
+    todosState.modifyTodo(index, editContent);
     setEditMode(false);
   };
 
@@ -22,7 +29,7 @@ function TodoListItem({ todo, index, todosState }) {
     <>
       <li className="flex gap-2">
         <span>{todo.id}</span>
-        <span>{todo.regDate}</span>
+        <span>{todo.updateDate === "" ? todo.regDate : todo.updateDate}</span>
 
         {editMode || (
           <>
@@ -36,6 +43,7 @@ function TodoListItem({ todo, index, todosState }) {
           <>
             <input
               type="text"
+              id={editContentInputRef}
               value={editContent}
               onChange={(e) => setEditContent(e.target.value)}
               placeholder="할일을 입력해주세요."
