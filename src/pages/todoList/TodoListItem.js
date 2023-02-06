@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -8,28 +8,33 @@ function TodoListItem({ todo, index, todosState }) {
     setEditMode(true);
   };
 
+  const editSuccess = () => {
+    setEditMode(false);
+  };
+
+  const editCancle = () => {
+    setEditMode(false);
+  };
+
   return (
     <>
       <li className="flex gap-2">
         <span>{todo.id}</span>
+        <span>{todo.regDate}</span>
 
-        {editMode == false ? (
+        {editMode || (
           <>
-            <span>{todo.regDate}</span>
             <span>{todo.content}</span>
-            <button className="btn" onClick={onClickModifyItem}>
-              수정
-            </button>
-            <button className="btn" onClick={onClickRemoveItem}>
-              삭제
-            </button>
+            <button onClick={onClickModifyItem}>수정</button>
+            <button onClick={onClickRemoveItem}>삭제</button>
           </>
-        ) : (
+        )}
+
+        {editMode && (
           <>
-            <span>{todo.content}</span>
-            <button className="btn" onClick={onClickModifyItem}>
-              수정완료
-            </button>
+            <input type="text" placeholder="할일을 입력해주세요." />
+            <button onClick={editSuccess}>수정완료</button>
+            <button onClick={editCancle}>취소</button>
           </>
         )}
       </li>
