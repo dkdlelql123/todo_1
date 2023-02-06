@@ -2,6 +2,7 @@ import { useState } from "react";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
+  const [editContent, setEditContent] = useState(todo.content);
 
   const onClickRemoveItem = () => todosState.removeTodo(index);
   const onClickModifyItem = () => {
@@ -32,7 +33,12 @@ function TodoListItem({ todo, index, todosState }) {
 
         {editMode && (
           <>
-            <input type="text" placeholder="할일을 입력해주세요." />
+            <input
+              type="text"
+              value={editContent}
+              onChange={(e) => setEditContent(e.target.value)}
+              placeholder="할일을 입력해주세요."
+            />
             <button onClick={editSuccess}>수정완료</button>
             <button onClick={editCancle}>취소</button>
           </>
