@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import NewTodoForm from "./NewTodoForm";
+import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
 
 function useTodosState() {
@@ -32,17 +33,11 @@ function TodoList() {
     <>
       <h1>TODOLIST</h1>
       <NewTodoForm todosState={todosState} />
-      <div className="mt-8">
-        {todosState.todos.map((e, i) => {
-          return (
-            <div key={i} className="flex gap-2">
-              <div>{e.content}</div>
-              <span>{e.regDate}</span>
-              <span onClick={() => todosState.removeTodo(i)}>삭제</span>
-            </div>
-          );
-        })}
-      </div>
+      <ul className="mt-8">
+        {todosState.todos.map((todo, i) => (
+          <TodoListItem key={i} todo={todo} index={i} />
+        ))}
+      </ul>
     </>
   );
 }
