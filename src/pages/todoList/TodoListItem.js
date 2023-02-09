@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import Btn from "../../utils/Button";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -27,13 +28,14 @@ function TodoListItem({ todo, index, todosState }) {
 
   return (
     <>
-      <li className="flex gap-2">
+      <li className="flex gap-2 items-center">
         <span>{todo.id}</span>
         <span>{todo.updateDate === "" ? todo.regDate : todo.updateDate}</span>
 
         {editMode || (
           <>
             <span>{todo.content}</span>
+            <Btn text="수정" onClick={() => onClickModifyItem} />
             <button onClick={onClickModifyItem}>수정</button>
             <button onClick={onClickRemoveItem}>삭제</button>
           </>
