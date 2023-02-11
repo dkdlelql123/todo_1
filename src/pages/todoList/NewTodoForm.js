@@ -1,3 +1,6 @@
+import { Button } from "@mui/material";
+import TextField from "@mui/material/TextField";
+
 function NewTodoForm({ todosState }) {
   const submit = (e) => {
     e.preventDefault();
@@ -17,9 +20,16 @@ function NewTodoForm({ todosState }) {
 
   return (
     <>
-      <form onSubmit={submit}>
-        <input type="text" id="content" placeholder="할일을 입력해주세요." />
-        <button type="submit">작성</button>
+      <form onSubmit={submit} className="flex flex-col mt-4 px-4 gap-2">
+        <TextField
+          id="content"
+          label="todo"
+          placeholder="할일을 입력해주세요."
+          multiline
+        />
+        <Button variant="contained">
+          <div className="font-bold">작성</div>
+        </Button>
       </form>
     </>
   );

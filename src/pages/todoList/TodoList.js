@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
+import { AppBar, Toolbar } from "@mui/material";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -37,7 +38,11 @@ function TodoList() {
   const todosState = useTodosState();
   return (
     <>
-      <h1>TODOLIST</h1>
+      <AppBar position="static">
+        <Toolbar className="justify-center">
+          <div className="font-bold text-lg">TODOLIST</div>
+        </Toolbar>
+      </AppBar>
       <NewTodoForm todosState={todosState} />
       <ul className="mt-8">
         {todosState.todos.map((todo, i) => (
