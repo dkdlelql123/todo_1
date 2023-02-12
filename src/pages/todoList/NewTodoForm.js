@@ -27,7 +27,7 @@ function NewTodoForm({ todosState }) {
           placeholder="할일을 입력해주세요."
           multiline
         />
-        <Button variant="contained">
+        <Button type="submit" variant="contained">
           <div className="font-bold">작성</div>
         </Button>
       </form>
