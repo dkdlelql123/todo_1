@@ -40,7 +40,7 @@ function TodoListItem({ todo, index, todosState }) {
 
         {editMode || (
           <>
-            <span className="p-4 shadow rounded-sm border ">
+            <span className="p-4 shadow rounded-sm border whitespace-pre-wrap leading-relaxed ">
               {todo.content}
             </span>
 
@@ -63,6 +63,7 @@ function TodoListItem({ todo, index, todosState }) {
               id={editContentInputRef}
               value={editContent}
               onChange={(e) => setEditContent(e.target.value)}
+              multiline
             />
             <ButtonGroup size="small" aria-label="small button group">
               <Button variant="contained" onClick={editSuccess}>
