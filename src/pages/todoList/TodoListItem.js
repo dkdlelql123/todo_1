@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import Btn from "../../utils/Button";
+import { Chip } from "@mui/material";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -28,9 +29,14 @@ function TodoListItem({ todo, index, todosState }) {
 
   return (
     <>
-      <li className="flex gap-2 items-center">
-        <span>{todo.id}</span>
-        <span>{todo.updateDate === "" ? todo.regDate : todo.updateDate}</span>
+      <li className="flex flex-col gap-2 ">
+        <div className="flex gap-2 items-center">
+          <Chip label={`번호 : ${todo.id}`} />
+          <Chip
+            variant="outlined"
+            label={todo.updateDate === "" ? todo.regDate : todo.updateDate}
+          />
+        </div>
 
         {editMode || (
           <>
