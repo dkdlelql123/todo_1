@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Btn from "../../utils/Button";
-import { Chip } from "@mui/material";
+import { Chip, ButtonGroup, Button, TextField } from "@mui/material";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -29,7 +29,7 @@ function TodoListItem({ todo, index, todosState }) {
 
   return (
     <>
-      <li className="flex flex-col gap-2 ">
+      <li className="flex flex-col gap-2 mt-10">
         <div className="flex gap-2 items-center">
           <Chip label={`번호 : ${todo.id}`} />
           <Chip
@@ -40,24 +40,38 @@ function TodoListItem({ todo, index, todosState }) {
 
         {editMode || (
           <>
-            <span>{todo.content}</span>
-            <Btn text="수정" onClick={() => onClickModifyItem} />
-            <button onClick={onClickModifyItem}>수정</button>
-            <button onClick={onClickRemoveItem}>삭제</button>
+            <span className="p-4 shadow rounded-sm border ">
+              {todo.content}
+            </span>
+
+            <ButtonGroup size="small" aria-label="small button group">
+              <Button variant="contained" onClick={onClickModifyItem}>
+                수정
+              </Button>
+              <Button variant="contained" onClick={onClickRemoveItem}>
+                삭제
+              </Button>
+            </ButtonGroup>
           </>
         )}
 
         {editMode && (
           <>
-            <input
+            <TextField
               type="text"
+              label="할일을 입력해주세요"
               id={editContentInputRef}
               value={editContent}
               onChange={(e) => setEditContent(e.target.value)}
-              placeholder="할일을 입력해주세요."
             />
-            <button onClick={editSuccess}>수정완료</button>
-            <button onClick={editCancle}>취소</button>
+            <ButtonGroup size="small" aria-label="small button group">
+              <Button variant="contained" onClick={editSuccess}>
+                수정완료
+              </Button>
+              <Button variant="contained" onClick={editCancle}>
+                취소
+              </Button>
+            </ButtonGroup>
           </>
         )}
       </li>

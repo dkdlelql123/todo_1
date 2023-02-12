@@ -44,11 +44,18 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <ul className="mt-8">
-        {todosState.todos.map((todo, i) => (
-          <TodoListItem key={i} todo={todo} index={i} todosState={todosState} />
-        ))}
-      </ul>
+      <div className="mt-4 px-4 t-8">
+        <ul>
+          {todosState.todos.map((todo, i) => (
+            <TodoListItem
+              key={i}
+              todo={todo}
+              index={i}
+              todosState={todosState}
+            />
+          ))}
+        </ul>
+      </div>
     </>
   );
 }
