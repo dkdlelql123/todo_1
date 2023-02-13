@@ -17,7 +17,7 @@ function useTodosState() {
       updateDate: "",
     };
 
-    setTodos([...todos, newTodo]);
+    setTodos([newTodo, ...todos]);
   };
   const modifyTodo = (index, newContent) => {
     const newTodos = todos.map((todo, i) =>
