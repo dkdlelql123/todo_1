@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import Btn from "../../utils/Button";
-import { Chip, ButtonGroup, Button, TextField } from "@mui/material";
+import { Chip, ButtonGroup, Button, TextField, Box } from "@mui/material";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -42,9 +42,16 @@ function TodoListItem({ todo, index, todosState }) {
 
         {editMode || (
           <>
-            <span className="p-4 shadow rounded-sm border whitespace-pre-wrap leading-relaxed ">
-              {todo.content}
-            </span>
+            <div className="p-4 shadow rounded-sm whitespace-pre-wrap leading-relaxed ">
+              <Box
+                sx={{
+                  fontSize: 14,
+                  //color: "primary.dark",
+                }}
+              >
+                {todo.content}
+              </Box>
+            </div>
 
             <ButtonGroup size="small" aria-label="small button group">
               <Button variant="contained" onClick={onClickModifyItem}>
