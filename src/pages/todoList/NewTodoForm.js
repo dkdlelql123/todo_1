@@ -22,6 +22,7 @@ function NewTodoForm({ todosState }) {
     <>
       <form onSubmit={submit} className="flex flex-col mt-4 px-4 gap-2">
         <TextField
+          rows={4}
           id="content"
           label="todo"
           placeholder="할일을 입력해주세요."

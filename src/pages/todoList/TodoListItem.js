@@ -31,9 +31,11 @@ function TodoListItem({ todo, index, todosState }) {
     <>
       <li className="flex flex-col gap-2 mt-10">
         <div className="flex gap-2 items-center">
-          <Chip label={`번호 : ${todo.id}`} />
+          <Chip variant="outlined" size="small" label={`번호 : ${todo.id}`} />
           <Chip
             variant="outlined"
+            color="primary"
+            size="small"
             label={todo.updateDate === "" ? todo.regDate : todo.updateDate}
           />
         </div>
