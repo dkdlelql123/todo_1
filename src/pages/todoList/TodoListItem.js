@@ -1,6 +1,8 @@
 import { useRef, useState } from "react";
 import Btn from "../../utils/Button";
 import { Chip, ButtonGroup, Button, TextField, Box } from "@mui/material";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch, faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -43,8 +45,8 @@ function TodoListItem({ todo, index, todosState }) {
         {editMode || (
           <>
             <div className="shadow rounded-[22px] flex">
-              <button className="flex-shrink-0 flex !items-start p-1 !rounded-[22px_0_0_22px]">
-                체크박스
+              <button className="flex-shrink-0 flex !items-start p-2 !rounded-[22px_0_0_22px]">
+                <FontAwesomeIcon icon={faCheck} className="check" size="2x" />
               </button>
               <Box
                 className="flex-1 bg-blue-200 whitespace-pre-wrap leading-relaxed"
