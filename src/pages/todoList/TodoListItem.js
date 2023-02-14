@@ -42,8 +42,12 @@ function TodoListItem({ todo, index, todosState }) {
 
         {editMode || (
           <>
-            <div className="p-4 shadow rounded-sm whitespace-pre-wrap leading-relaxed ">
+            <div className="shadow rounded-[22px] flex">
+              <button className="flex-shrink-0 flex !items-start p-1 !rounded-[22px_0_0_22px]">
+                체크박스
+              </button>
               <Box
+                className="flex-1 bg-blue-200 whitespace-pre-wrap leading-relaxed"
                 sx={{
                   fontSize: 14,
                   //color: "primary.dark",
@@ -51,6 +55,7 @@ function TodoListItem({ todo, index, todosState }) {
               >
                 {todo.content}
               </Box>
+              <div className="flex-shrink-0 w-[100px] bg-red-200">후</div>
             </div>
 
             <ButtonGroup size="small" aria-label="small button group">
