@@ -1,8 +1,7 @@
 import { useRef, useState } from "react";
-import Btn from "../../utils/Button";
-import { Chip, ButtonGroup, Button, TextField, Box } from "@mui/material";
+import { Chip, ButtonGroup, Button, TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faCheck } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 function TodoListItem({ todo, index, todosState }) {
   const [editMode, setEditMode] = useState(false);
@@ -45,19 +44,19 @@ function TodoListItem({ todo, index, todosState }) {
         {editMode || (
           <>
             <div className="shadow rounded-[22px] flex">
-              <button className="flex-shrink-0 flex !items-start p-2 !rounded-[22px_0_0_22px]">
+              <button
+                className={`flex-shrink-0 flex !items-start p-2 !rounded-[22px_0_0_22px]
+              ${
+                todo.id % 2 == 0
+                  ? `text-[color:var(--mui-color-primary-main)]`
+                  : `text-gray-400`
+              }`}
+              >
                 <FontAwesomeIcon icon={faCheck} className="check" size="2x" />
               </button>
-              <Box
-                className="flex-1 bg-blue-200 whitespace-pre-wrap leading-relaxed"
-                sx={{
-                  fontSize: 14,
-                  //color: "primary.dark",
-                }}
-              >
+              <div className="flex-1 bg-blue-200 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)]">
                 {todo.content}
-              </Box>
-              <div className="flex-shrink-0 w-[100px] bg-red-200">후</div>
+              </div>
             </div>
 
             <ButtonGroup size="small" aria-label="small button group">
