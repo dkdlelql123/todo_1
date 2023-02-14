@@ -15,7 +15,7 @@ function App() {
         </Routes>
 
         <footer className="pt-2 flex items-center gap-2">
-          <NavLink to={"/list"} className=" text-xs">
+          <NavLink to={"/list"} className=" text-xs text-[20px]">
             리스트
           </NavLink>
           <NavLink to={"/write"} className=" text-xs">
