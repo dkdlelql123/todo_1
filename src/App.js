@@ -18,10 +18,16 @@ function App() {
           <NavLink to={"/list"} className=" text-xs text-[20px]">
             리스트
           </NavLink>
-          <NavLink to={"/write"} className=" text-xs">
+          <NavLink
+            to={"/write"}
+            className=" text-xs first-letter:text-[23px] first-letter:hover:text-[red]"
+          >
             작성
           </NavLink>
-          <NavLink to={"/todoList"} className=" text-xs">
+          <NavLink
+            to={"/todoList"}
+            className=" text-lg font-bold before:content-['---'] text-[color:var(--color-3)]"
+          >
             투두리스트
           </NavLink>
         </footer>
