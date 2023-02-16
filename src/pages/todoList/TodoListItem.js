@@ -3,7 +3,7 @@ import { Chip, ButtonGroup, Button, TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
-function TodoListItem({ todo, index, todosState }) {
+function TodoListItem({ todo, index, todosState, setOptionDrawerItemId }) {
   const [editMode, setEditMode] = useState(false);
   const [editContent, setEditContent] = useState(todo.content);
   const editContentInputRef = useRef(null);
@@ -58,12 +58,13 @@ function TodoListItem({ todo, index, todosState }) {
                 </span>
               </Button>
               <div className="flex-shrink-0 bg-gray-300 w-[2px] my-4 mr-4"></div>
-              <div className="flex-1 flex items-center whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)]">
+              <div className="flex-1 flex items-center  whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)]">
                 {todo.content}
               </div>
               <Button
                 className={`flex-shrink-0 !items-start justify-center !rounded-[0_22px_22px_0] w-[30px] `}
                 color="inherit"
+                onClick={() => setOptionDrawerItemId(todo.id)}
               >
                 <span className="text-gray-400 flex items-center h-[60px]">
                   <FontAwesomeIcon

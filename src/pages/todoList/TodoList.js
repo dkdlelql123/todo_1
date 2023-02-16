@@ -36,6 +36,7 @@ function useTodosState() {
 
 function TodoList() {
   const todosState = useTodosState();
+  const [optionDrawerItemId, setOptionDrawerItemId] = useState(null);
   return (
     <>
       <AppBar position="static">
@@ -44,6 +45,15 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
+      <Drawer
+        anchor={"bottom"}
+        open={optionDrawerItemId !== null}
+        onClose={() => {
+          setOptionDrawerItemId(null);
+        }}
+      >
+        <div className="p-10">{optionDrawerItemId}번 drawer</div>
+      </Drawer>
       <div className="mt-4 px-4 t-8">
         <ul>
           {todosState.todos.map((todo, i) => (
@@ -52,13 +62,11 @@ function TodoList() {
               todo={todo}
               index={i}
               todosState={todosState}
+              setOptionDrawerItemId={setOptionDrawerItemId}
             />
           ))}
         </ul>
       </div>
-      <Drawer anchor="bottom" open="true">
-        <div className="p-10">aaa</div>
-      </Drawer>
     </>
   );
 }
