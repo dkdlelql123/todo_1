@@ -44,19 +44,34 @@ function TodoListItem({ todo, index, todosState }) {
         {editMode || (
           <>
             <div className="shadow rounded-[22px] flex">
-              <button
-                className={`flex-shrink-0 flex !items-start p-2 !rounded-[22px_0_0_22px]
-              ${
-                todo.id % 2 == 0
-                  ? `text-[color:var(--mui-color-primary-main)]`
-                  : `text-gray-400`
-              }`}
+              <Button
+                className={`flex-shrink-0 flex !items-start !rounded-[22px_0_0_22px]  `}
               >
-                <FontAwesomeIcon icon={faCheck} className="check" size="2x" />
-              </button>
+                <span
+                  className={` ${
+                    todo.id % 2 === 0
+                      ? `text-[color:var(--mui-color-primary-main)]`
+                      : `text-gray-400`
+                  }`}
+                >
+                  <FontAwesomeIcon icon={faCheck} className="check" size="2x" />
+                </span>
+              </Button>
               <div className="flex-1 bg-blue-200 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)]">
                 {todo.content}
               </div>
+              <Button
+                className={`flex-shrink-0 flex !items-start justify-center !rounded-[0_22px_22px_0]  w-[30px]`}
+                color="inherit"
+              >
+                <span className="text-gray-400">
+                  <FontAwesomeIcon
+                    icon={faEllipsisVertical}
+                    className="check"
+                    size="lg"
+                  />
+                </span>
+              </Button>
             </div>
 
             <ButtonGroup size="small" aria-label="small button group">
