@@ -45,10 +45,10 @@ function TodoListItem({ todo, index, todosState }) {
           <>
             <div className="shadow rounded-[22px] flex">
               <Button
-                className={`flex-shrink-0 flex !items-start !rounded-[22px_0_0_22px]  `}
+                className={`flex-shrink-0  !items-start !rounded-[22px_0_0_22px] `}
               >
                 <span
-                  className={` ${
+                  className={` flex items-center h-[60px] ${
                     todo.id % 2 === 0
                       ? `text-[color:var(--mui-color-primary-main)]`
                       : `text-gray-400`
@@ -61,10 +61,10 @@ function TodoListItem({ todo, index, todosState }) {
                 {todo.content}
               </div>
               <Button
-                className={`flex-shrink-0 flex !items-start justify-center !rounded-[0_22px_22px_0]  w-[30px]`}
+                className={`flex-shrink-0 !items-start justify-center !rounded-[0_22px_22px_0] w-[30px] `}
                 color="inherit"
               >
-                <span className="text-gray-400">
+                <span className="text-gray-400 flex items-center h-[60px]">
                   <FontAwesomeIcon
                     icon={faEllipsisVertical}
                     className="check"
