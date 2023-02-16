@@ -2,7 +2,7 @@ import { useRef, useState } from "react";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Drawer, Toolbar } from "@mui/material";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -56,6 +56,9 @@ function TodoList() {
           ))}
         </ul>
       </div>
+      <Drawer anchor="bottom" open="true">
+        <div className="p-10">aaa</div>
+      </Drawer>
     </>
   );
 }

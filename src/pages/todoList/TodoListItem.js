@@ -57,7 +57,8 @@ function TodoListItem({ todo, index, todosState }) {
                   <FontAwesomeIcon icon={faCheck} className="check" size="2x" />
                 </span>
               </Button>
-              <div className="flex-1 bg-blue-200 whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)]">
+              <div className="flex-shrink-0 bg-gray-300 w-[2px] my-4 mr-4"></div>
+              <div className="flex-1 flex items-center whitespace-pre-wrap leading-relaxed hover:text-[color:var(--mui-color-primary-main)]">
                 {todo.content}
               </div>
               <Button
