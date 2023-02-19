@@ -34,17 +34,18 @@ function useTodosState() {
   return { todos, addTodo, modifyTodo, removeTodo };
 }
 
+function useTodoDrawerStatus() {
+  const [itemId, setItemId] = useState(null);
+  const opened = useMemo(() => itemId !== null, [itemId]);
+  const close = () => setItemId(null);
+  const open = (id) => setItemId(id);
+
+  return { itemId, opened, close, open };
+}
+
 function TodoList() {
   const todosState = useTodosState();
-
-  const [optionDrawerItemId, setOptionDrawerItemId] = useState(null);
-  const drawerOpened = useMemo(
-    () => optionDrawerItemId !== null,
-    [optionDrawerItemId]
-  );
-  const closeDrawer = () => setOptionDrawerItemId(null);
-  const openDrawer = (id) => setOptionDrawerItemId(id);
-
+  const todoOptionDrawerStatus = useTodoDrawerStatus();
   return (
     <>
       <AppBar position="static">
@@ -53,8 +54,12 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <Drawer anchor={"bottom"} open={drawerOpened} onClose={closeDrawer}>
-        <div className="p-10">{optionDrawerItemId}번 drawer</div>
+      <Drawer
+        anchor={"bottom"}
+        open={todoOptionDrawerStatus.opened}
+        onClose={todoOptionDrawerStatus.close}
+      >
+        <div className="p-10">{todoOptionDrawerStatus.itemId}번 drawer</div>
       </Drawer>
       <div className="mt-4 px-4 t-8">
         <ul>
@@ -64,7 +69,7 @@ function TodoList() {
               todo={todo}
               index={i}
               todosState={todosState}
-              openDrawer={openDrawer}
+              openDrawer={todoOptionDrawerStatus.open}
             />
           ))}
         </ul>
