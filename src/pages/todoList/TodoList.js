@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useMemo } from "react";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
@@ -36,7 +36,15 @@ function useTodosState() {
 
 function TodoList() {
   const todosState = useTodosState();
+
   const [optionDrawerItemId, setOptionDrawerItemId] = useState(null);
+  const drawerOpened = useMemo(
+    () => optionDrawerItemId !== null,
+    [optionDrawerItemId]
+  );
+  const closeDrawer = () => setOptionDrawerItemId(null);
+  const openDrawer = (id) => setOptionDrawerItemId(id);
+
   return (
     <>
       <AppBar position="static">
@@ -45,13 +53,7 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <Drawer
-        anchor={"bottom"}
-        open={optionDrawerItemId !== null}
-        onClose={() => {
-          setOptionDrawerItemId(null);
-        }}
-      >
+      <Drawer anchor={"bottom"} open={drawerOpened} onClose={closeDrawer}>
         <div className="p-10">{optionDrawerItemId}번 drawer</div>
       </Drawer>
       <div className="mt-4 px-4 t-8">
@@ -62,7 +64,7 @@ function TodoList() {
               todo={todo}
               index={i}
               todosState={todosState}
-              setOptionDrawerItemId={setOptionDrawerItemId}
+              openDrawer={openDrawer}
             />
           ))}
         </ul>
