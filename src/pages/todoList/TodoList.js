@@ -2,7 +2,8 @@ import { useRef, useState, useMemo } from "react";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
-import { AppBar, Drawer, Toolbar } from "@mui/material";
+import OptionDrawer from "../../utils/OptionDrawer";
+import { AppBar, Toolbar } from "@mui/material";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -54,13 +55,8 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <Drawer
-        anchor={"bottom"}
-        open={todoOptionDrawerStatus.opened}
-        onClose={todoOptionDrawerStatus.close}
-      >
-        <div className="p-10">{todoOptionDrawerStatus.itemId}번 drawer</div>
-      </Drawer>
+      <OptionDrawer status={todoOptionDrawerStatus} />
+
       <div className="mt-4 px-4 t-8">
         <ul>
           {todosState.todos.map((todo, i) => (
