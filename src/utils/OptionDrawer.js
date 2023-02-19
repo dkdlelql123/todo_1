@@ -1,4 +1,10 @@
-import { SwipeableDrawer } from "@mui/material";
+import {
+  SwipeableDrawer,
+  List,
+  ListItemButton,
+  ListItemText,
+  Divider,
+} from "@mui/material";
 
 function OptionDrawer({ status }) {
   return (
@@ -9,7 +15,25 @@ function OptionDrawer({ status }) {
         open={status.opened}
         onClose={status.close}
       >
-        <div className="p-10">{status.itemId}번 drawer</div>
+        <List>
+          <ListItemButton>
+            <ListItemText>
+              <span
+                className={`text-[color:var(--mui-color-primary-main)] font-bold`}
+              >
+                {status.itemId}번
+              </span>
+              에 대하여
+            </ListItemText>
+          </ListItemButton>
+          <Divider />
+          <ListItemButton>
+            <ListItemText>수정</ListItemText>
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemText>삭제</ListItemText>
+          </ListItemButton>
+        </List>
       </SwipeableDrawer>
     </>
   );
