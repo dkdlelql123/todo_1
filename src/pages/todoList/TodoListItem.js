@@ -8,7 +8,6 @@ function TodoListItem({ todo, index, todosState, openDrawer }) {
   const [editContent, setEditContent] = useState(todo.content);
   const editContentInputRef = useRef(null);
 
-  const onClickRemoveItem = () => todosState.removeTodo(index);
   const onClickModifyItem = () => {
     setEditMode(true);
   };
@@ -79,9 +78,6 @@ function TodoListItem({ todo, index, todosState, openDrawer }) {
             <ButtonGroup size="small" aria-label="small button group">
               <Button variant="contained" onClick={onClickModifyItem}>
                 수정
-              </Button>
-              <Button variant="contained" onClick={onClickRemoveItem}>
-                삭제
               </Button>
             </ButtonGroup>
           </>

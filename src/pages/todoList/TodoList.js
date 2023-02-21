@@ -2,7 +2,7 @@ import { useRef, useState, useMemo } from "react";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
-import OptionDrawer from "../../utils/OptionDrawer";
+import OptionDrawer from "./OptionDrawer";
 import { AppBar, Toolbar } from "@mui/material";
 
 function useTodosState() {
@@ -28,14 +28,14 @@ function useTodosState() {
     );
     setTodos(newTodos);
   };
-  const removeTodo = (index) => {
-    const newTodos = todos.filter((e, i) => i !== index);
+  const removeTodo = (removeId) => {
+    const newTodos = todos.filter((e) => e.id !== removeId);
     setTodos(newTodos);
   };
   return { todos, addTodo, modifyTodo, removeTodo };
 }
 
-function useTodoDrawerStatus() {
+function useTodoDrawerState() {
   const [itemId, setItemId] = useState(null);
   const opened = useMemo(() => itemId !== null, [itemId]);
   const close = () => setItemId(null);
@@ -46,7 +46,7 @@ function useTodoDrawerStatus() {
 
 function TodoList() {
   const todosState = useTodosState();
-  const todoOptionDrawerStatus = useTodoDrawerStatus();
+  const todoOptionDrawerState = useTodoDrawerState();
   return (
     <>
       <AppBar position="static">
@@ -55,7 +55,7 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <OptionDrawer status={todoOptionDrawerStatus} />
+      <OptionDrawer todosState={todosState} state={todoOptionDrawerState} />
 
       <div className="mt-4 px-4 t-8">
         <ul>
@@ -65,7 +65,7 @@ function TodoList() {
               todo={todo}
               index={i}
               todosState={todosState}
-              openDrawer={todoOptionDrawerStatus.open}
+              openDrawer={todoOptionDrawerState.open}
             />
           ))}
         </ul>

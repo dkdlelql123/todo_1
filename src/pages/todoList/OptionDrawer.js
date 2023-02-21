@@ -9,14 +9,19 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 
-function OptionDrawer({ status }) {
+function OptionDrawer({ todosState, state }) {
+  const removeTodo = () => {
+    todosState.removeTodo(state.itemId);
+    state.close();
+  };
+
   return (
     <>
       <SwipeableDrawer
         onOpen={() => {}}
         anchor={"bottom"}
-        open={status.opened}
-        onClose={status.close}
+        open={state.opened}
+        onClose={state.close}
       >
         <List>
           <ListItemButton>
@@ -24,7 +29,7 @@ function OptionDrawer({ status }) {
               <span
                 className={`text-[color:var(--mui-color-primary-main)] font-bold`}
               >
-                {status.itemId}번
+                {state.itemId}번
               </span>
               에 대하여
             </ListItemText>
@@ -38,6 +43,7 @@ function OptionDrawer({ status }) {
           </ListItemButton>
           <ListItemButton
             className={`flex items-baseline gap-4 !text-[color:var(--mui-color-grey-700)]`}
+            onClick={removeTodo}
           >
             <FontAwesomeIcon icon={faTrashAlt} />
             <ListItemText>삭제</ListItemText>
