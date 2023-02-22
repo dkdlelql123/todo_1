@@ -20,9 +20,9 @@ function useTodosState() {
 
     setTodos([newTodo, ...todos]);
   };
-  const modifyTodo = (index, newContent) => {
+  const modifyTodo = (editId, newContent) => {
     const newTodos = todos.map((todo, i) =>
-      i !== index
+      todo.id !== editId
         ? todo
         : { ...todo, content: newContent, updateDate: dateToStr(new Date()) }
     );
@@ -45,7 +45,7 @@ function useTodoDrawerState() {
 }
 
 function useTodoModalState() {
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const handleOpen = () => setOpenModal(true);
   const handleClose = () => setOpenModal(false);
   return { openModal, handleOpen, handleClose };
@@ -63,7 +63,11 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <OptionDrawer todosState={todosState} state={todoOptionDrawerState} />
+      <OptionDrawer
+        todosState={todosState}
+        state={todoOptionDrawerState}
+        modalState={todoModalState}
+      />
 
       <Modal
         open={todoModalState.openModal}

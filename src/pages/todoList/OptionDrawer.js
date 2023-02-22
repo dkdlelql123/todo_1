@@ -9,10 +9,16 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 
-function OptionDrawer({ todosState, state }) {
+function OptionDrawer({ todosState, state, modalState }) {
   const removeTodo = () => {
     todosState.removeTodo(state.itemId);
     state.close();
+  };
+
+  const editTodo = () => {
+    modalState.handleOpen();
+    todosState.modifyTodo(state.itemId, "");
+    //state.close();
   };
 
   return (
@@ -37,6 +43,7 @@ function OptionDrawer({ todosState, state }) {
           <Divider />
           <ListItemButton
             className={`flex items-baseline gap-4 !text-[color:var(--mui-color-grey-700)]`}
+            onClick={editTodo}
           >
             <FontAwesomeIcon icon={faEdit} />
             <ListItemText>수정</ListItemText>
