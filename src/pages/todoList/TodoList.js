@@ -3,7 +3,7 @@ import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
-import { AppBar, Toolbar, Modal } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -32,7 +32,16 @@ function useTodosState() {
     const newTodos = todos.filter((e) => e.id !== removeId);
     setTodos(newTodos);
   };
-  return { todos, addTodo, modifyTodo, removeTodo };
+  const findTodoIndexById = (id) => {
+    return todos.findIndex((todo) => todo.id === id);
+  };
+  const findTodoById = (id) => {
+    const index = findTodoIndexById(id);
+    console.log(index);
+    if (index === -1) return null;
+    return todos[index];
+  };
+  return { todos, addTodo, modifyTodo, removeTodo, findTodoById };
 }
 
 function useTodoDrawerState() {
@@ -40,21 +49,12 @@ function useTodoDrawerState() {
   const opened = useMemo(() => itemId !== null, [itemId]);
   const close = () => setItemId(null);
   const open = (id) => setItemId(id);
-
   return { itemId, opened, close, open };
-}
-
-function useTodoModalState() {
-  const [openModal, setOpenModal] = useState(false);
-  const handleOpen = () => setOpenModal(true);
-  const handleClose = () => setOpenModal(false);
-  return { openModal, handleOpen, handleClose };
 }
 
 function TodoList() {
   const todosState = useTodosState();
   const todoOptionDrawerState = useTodoDrawerState();
-  const todoModalState = useTodoModalState();
   return (
     <>
       <AppBar position="static">
@@ -63,26 +63,7 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} />
-      <OptionDrawer
-        todosState={todosState}
-        state={todoOptionDrawerState}
-        modalState={todoModalState}
-      />
-
-      <Modal
-        open={todoModalState.openModal}
-        onClose={() => {}}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-        className="flex justify-center items-center"
-      >
-        <div className="bg-white rounded-[20px] p-10 border-0">
-          <div id="modal-modal-title">Text in a modal</div>
-          <div id="modal-modal-description">
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </div>
-        </div>
-      </Modal>
+      <OptionDrawer todosState={todosState} state={todoOptionDrawerState} />
 
       <div className="mt-4 px-4 t-8">
         <ul>

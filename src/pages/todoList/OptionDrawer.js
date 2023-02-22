@@ -4,25 +4,43 @@ import {
   ListItemButton,
   ListItemText,
   Divider,
-  ListItemIcon,
 } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import EditTodoModal from "./EditTodoModal";
 
-function OptionDrawer({ todosState, state, modalState }) {
+function useTodoModalState() {
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+  return { open, handleOpen, handleClose };
+}
+
+function OptionDrawer({ todosState, state }) {
+  const todoModalState = useTodoModalState();
+
   const removeTodo = () => {
     todosState.removeTodo(state.itemId);
     state.close();
   };
 
   const editTodo = () => {
-    modalState.handleOpen();
-    todosState.modifyTodo(state.itemId, "");
+    todoModalState.handleOpen();
+    //todosState.modifyTodo(state.itemId, "");
     //state.close();
   };
 
+  const todo = todosState.findTodoById(state.itemId);
+
   return (
     <>
+      <EditTodoModal
+        state={todoModalState}
+        todosState={todosState}
+        todo={todo}
+      />
+
       <SwipeableDrawer
         onOpen={() => {}}
         anchor={"bottom"}
