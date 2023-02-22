@@ -21,6 +21,9 @@ function OptionDrawer({ todosState, state }) {
   const todoModalState = useTodoModalState();
 
   const removeTodo = () => {
+    if (window.confirm(`${state.itemId}번 할일을 삭제하시겠습니까?`) == false) {
+      return;
+    }
     todosState.removeTodo(state.itemId);
     state.close();
   };
