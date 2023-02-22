@@ -12,8 +12,8 @@ function EditTodoModal({ drawerState, todosState, state, todo }) {
       return;
     }
 
-    //drawerState.close();
     state.handleClose();
+    drawerState.close();
   };
 
   return (
