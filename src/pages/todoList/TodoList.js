@@ -3,7 +3,7 @@ import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
-import { AppBar, Toolbar } from "@mui/material";
+import { AppBar, Toolbar, Modal } from "@mui/material";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -44,9 +44,17 @@ function useTodoDrawerState() {
   return { itemId, opened, close, open };
 }
 
+function useTodoModalState() {
+  const [openModal, setOpenModal] = useState(true);
+  const handleOpen = () => setOpenModal(true);
+  const handleClose = () => setOpenModal(false);
+  return { openModal, handleOpen, handleClose };
+}
+
 function TodoList() {
   const todosState = useTodosState();
   const todoOptionDrawerState = useTodoDrawerState();
+  const todoModalState = useTodoModalState();
   return (
     <>
       <AppBar position="static">
@@ -56,6 +64,21 @@ function TodoList() {
       </AppBar>
       <NewTodoForm todosState={todosState} />
       <OptionDrawer todosState={todosState} state={todoOptionDrawerState} />
+
+      <Modal
+        open={todoModalState.openModal}
+        onClose={() => {}}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        className="flex justify-center items-center"
+      >
+        <div className="bg-white rounded-[20px] p-10 border-0">
+          <div id="modal-modal-title">Text in a modal</div>
+          <div id="modal-modal-description">
+            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+          </div>
+        </div>
+      </Modal>
 
       <div className="mt-4 px-4 t-8">
         <ul>
