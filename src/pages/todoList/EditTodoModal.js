@@ -1,6 +1,6 @@
 import { Modal, TextField, Button } from "@mui/material";
 
-function EditTodoModal({ state, todosState, todo }) {
+function EditTodoModal({ drawerState, todosState, state, todo }) {
   const submit = (e) => {
     e.preventDefault();
 
@@ -13,8 +13,8 @@ function EditTodoModal({ state, todosState, todo }) {
     }
 
     todosState.modifyTodo(todo?.id, form.content.value);
-    form.content.value = "";
-    form.content.focus();
+    drawerState.close();
+    state.handleClose();
   };
 
   return (
@@ -25,18 +25,19 @@ function EditTodoModal({ state, todosState, todo }) {
         aria-labelledby="modal-modal-title"
         className="flex justify-center items-center"
       >
-        <div className="bg-white rounded-[20px] p-5 border-0">
+        <div className="bg-white rounded-[12px] p-4 pb-6 border-0">
           <form onSubmit={submit} className="flex flex-col mt-4 px-4 gap-2">
             <TextField
-              rows={4}
+              rows={5}
               id="content"
               label="todo"
               placeholder="할일을 입력해주세요."
               multiline
               defaultValue={todo?.content}
+              className=" w-[400px]"
             />
             <Button type="submit" variant="contained">
-              <div className="font-bold">저장</div>
+              <div>저장</div>
             </Button>
           </form>
         </div>

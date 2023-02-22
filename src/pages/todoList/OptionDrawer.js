@@ -27,8 +27,6 @@ function OptionDrawer({ todosState, state }) {
 
   const editTodo = () => {
     todoModalState.handleOpen();
-    //todosState.modifyTodo(state.itemId, "");
-    //state.close();
   };
 
   const todo = todosState.findTodoById(state.itemId);
@@ -36,8 +34,9 @@ function OptionDrawer({ todosState, state }) {
   return (
     <>
       <EditTodoModal
-        state={todoModalState}
+        drawerState={state}
         todosState={todosState}
+        state={todoModalState}
         todo={todo}
       />
 

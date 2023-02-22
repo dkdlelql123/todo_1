@@ -6,26 +6,6 @@ import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 function TodoListItem({ todo, index, todosState, openDrawer }) {
   const [editMode, setEditMode] = useState(false);
   const [editContent, setEditContent] = useState(todo.content);
-  const editContentInputRef = useRef(null);
-
-  const onClickModifyItem = () => {
-    setEditMode(true);
-  };
-
-  const editSuccess = () => {
-    if (editContent.trim().length === 0) {
-      alert("할일을 입력해주세요");
-      return;
-    }
-
-    todosState.modifyTodo(index, editContent);
-    setEditMode(false);
-  };
-
-  const editCancle = () => {
-    setEditContent(todo.content);
-    setEditMode(false);
-  };
 
   return (
     <>
@@ -74,33 +54,6 @@ function TodoListItem({ todo, index, todosState, openDrawer }) {
                 </span>
               </Button>
             </div>
-
-            <ButtonGroup size="small" aria-label="small button group">
-              <Button variant="contained" onClick={onClickModifyItem}>
-                수정
-              </Button>
-            </ButtonGroup>
-          </>
-        )}
-
-        {editMode && (
-          <>
-            <TextField
-              type="text"
-              label="할일을 입력해주세요"
-              id={editContentInputRef}
-              value={editContent}
-              onChange={(e) => setEditContent(e.target.value)}
-              multiline
-            />
-            <ButtonGroup size="small" aria-label="small button group">
-              <Button variant="contained" onClick={editSuccess}>
-                수정완료
-              </Button>
-              <Button variant="contained" onClick={editCancle}>
-                취소
-              </Button>
-            </ButtonGroup>
           </>
         )}
       </li>

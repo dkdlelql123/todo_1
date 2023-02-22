@@ -37,7 +37,6 @@ function useTodosState() {
   };
   const findTodoById = (id) => {
     const index = findTodoIndexById(id);
-    console.log(index);
     if (index === -1) return null;
     return todos[index];
   };
