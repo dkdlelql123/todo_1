@@ -4,6 +4,7 @@ import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
 import { AppBar, Toolbar, Snackbar, Alert } from "@mui/material";
+import NoticeSnackBar from "./NoticeSnackBar";
 
 function useTodosState() {
   const [todos, setTodos] = useState([]);
@@ -58,22 +59,9 @@ function TodoList() {
   const [open, setOpen] = useState(false);
   return (
     <>
-      <div onClick={() => setOpen(true)}>Down</div>
-      <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
-      >
-        <Alert
-          onClose={() => setOpen(false)}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          This is a success message!
-        </Alert>
-      </Snackbar>
+      <NoticeSnackBar open={open} setOpen={setOpen} />
 
-      <AppBar position="static">
+      <AppBar position="static" onClick={() => setOpen(true)}>
         <Toolbar className="justify-center">
           <div className="font-bold text-lg">TODOLIST</div>
         </Toolbar>
