@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import EditTodoModal from "./EditTodoModal";
+import { TodosState } from "../../states";
 
 function useTodoModalState() {
   const [open, setOpen] = useState(false);
@@ -17,7 +18,8 @@ function useTodoModalState() {
   return { open, handleOpen, handleClose };
 }
 
-function OptionDrawer({ todosState, state, snackBarState }) {
+function OptionDrawer({ state, snackBarState }) {
+  const todosStatus = TodosState();
   const todoModalState = useTodoModalState();
 
   const removeTodo = () => {
@@ -26,7 +28,7 @@ function OptionDrawer({ todosState, state, snackBarState }) {
     ) {
       return;
     }
-    todosState.removeTodo(state.itemId);
+    todosStatus.removeTodo(state.itemId);
     state.close();
     snackBarState.open(`${state.itemId}번 글이 삭제되었습니다.`, "error");
   };
@@ -35,13 +37,13 @@ function OptionDrawer({ todosState, state, snackBarState }) {
     todoModalState.handleOpen();
   };
 
-  const todo = todosState.findTodoById(state.itemId);
+  const todo = todosStatus.findTodoById(state.itemId);
 
   return (
     <>
       <EditTodoModal
         drawerState={state}
-        todosState={todosState}
+        //todosState={todosState}
         state={todoModalState}
         todo={todo}
         snackBarState={snackBarState}

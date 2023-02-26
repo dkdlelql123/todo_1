@@ -57,7 +57,6 @@ function TodoList() {
       </AppBar>
       <NewTodoForm snackBarState={snackBarState} />
       <OptionDrawer
-        todosState={todosState}
         state={todoOptionDrawerState}
         snackBarState={snackBarState}
       />
@@ -69,7 +68,6 @@ function TodoList() {
               key={i}
               todo={todo}
               index={i}
-              todosState={todosState}
               openDrawer={todoOptionDrawerState.open}
             />
           ))}

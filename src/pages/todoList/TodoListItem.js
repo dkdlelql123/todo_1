@@ -3,7 +3,7 @@ import { Chip, ButtonGroup, Button, TextField } from "@mui/material";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
-function TodoListItem({ todo, index, todosState, openDrawer }) {
+function TodoListItem({ todo, index, openDrawer }) {
   const [editMode, setEditMode] = useState(false);
   const [editContent, setEditContent] = useState(todo.content);
 
