@@ -1,6 +1,12 @@
 import { Modal, TextField, Button } from "@mui/material";
 
-function EditTodoModal({ drawerState, todosState, state, todo }) {
+function EditTodoModal({
+  drawerState,
+  todosState,
+  state,
+  todo,
+  snackBarState,
+}) {
   const submit = (e) => {
     e.preventDefault();
 
@@ -16,6 +22,7 @@ function EditTodoModal({ drawerState, todosState, state, todo }) {
 
     state.handleClose();
     drawerState.close();
+    snackBarState.open(`${todo.id}번 글이 수정되었습니다.`);
   };
 
   return (

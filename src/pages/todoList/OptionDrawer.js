@@ -17,7 +17,7 @@ function useTodoModalState() {
   return { open, handleOpen, handleClose };
 }
 
-function OptionDrawer({ todosState, state }) {
+function OptionDrawer({ todosState, state, snackBarState }) {
   const todoModalState = useTodoModalState();
 
   const removeTodo = () => {
@@ -26,6 +26,7 @@ function OptionDrawer({ todosState, state }) {
     }
     todosState.removeTodo(state.itemId);
     state.close();
+    snackBarState.open(`${state.itemId}번 글이 삭제되었습니다.`, "error");
   };
 
   const editTodo = () => {
@@ -41,6 +42,7 @@ function OptionDrawer({ todosState, state }) {
         todosState={todosState}
         state={todoModalState}
         todo={todo}
+        snackBarState={snackBarState}
       />
 
       <SwipeableDrawer

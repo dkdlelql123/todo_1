@@ -93,7 +93,11 @@ function TodoList() {
         </Toolbar>
       </AppBar>
       <NewTodoForm todosState={todosState} snackBarState={snackBarState} />
-      <OptionDrawer todosState={todosState} state={todoOptionDrawerState} />
+      <OptionDrawer
+        todosState={todosState}
+        state={todoOptionDrawerState}
+        snackBarState={snackBarState}
+      />
       <NoticeSnackBar snackBarState={snackBarState} />
       <div className="mt-4 px-4 t-8">
         <ul>
