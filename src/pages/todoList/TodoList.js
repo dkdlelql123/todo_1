@@ -5,9 +5,15 @@ import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
 import { AppBar, Toolbar } from "@mui/material";
 import NoticeSnackBar from "./NoticeSnackBar";
+import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
+
+const todosAtom = atom({
+  key: "app/todosAtom",
+  default: [],
+});
 
 function useTodosState() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useRecoilState(todosAtom);
   const lastTodoIdRef = useRef(0);
 
   const addTodo = (newContent) => {

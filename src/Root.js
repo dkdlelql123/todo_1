@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { HashRouter } from "react-router-dom";
 import App from "./App";
 import theme from "./styles/theme";
+import { RecoilRoot } from "recoil";
 
 const muiThemePaletteKeys = [
   "background",
@@ -35,9 +36,11 @@ function Root() {
   }, []);
 
   return (
-    <HashRouter>
-      <App />
-    </HashRouter>
+    <RecoilRoot>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </RecoilRoot>
   );
 }
 
