@@ -20,6 +20,7 @@ function useTodosState() {
     };
 
     setTodos([newTodo, ...todos]);
+    return newTodo;
   };
   const modifyTodo = (editId, newContent) => {
     const newTodos = todos.map((todo, i) =>
@@ -54,21 +55,29 @@ function useTodoDrawerState() {
 
 function useNoticeSnackBarState() {
   const [opened, setOpened] = useState(false);
-  const [msg, setMsg] = useState();
-  const [severity, setSeverity] = useState();
-  const [autoHideDuration, setAutoHideDuration] = useState();
-  const open = (
-    msg = "메세지를 입력해주세요",
-    severity = "success",
-    duration = "3000"
-  ) => {
+  const [autoHideDuration, setAutoHideDuration] = useState(null);
+  const [severity, setSeverity] = useState(null);
+  const [msg, setMsg] = useState(null);
+
+  const open = (msg, severity = "success", autoHideDuration = 1000) => {
     setOpened(true);
     setMsg(msg);
     setSeverity(severity);
-    setAutoHideDuration(duration);
+    setAutoHideDuration(autoHideDuration);
   };
-  const close = () => setOpened(false);
-  return { opened, msg, severity, autoHideDuration, open, close };
+
+  const close = () => {
+    setOpened(false);
+  };
+
+  return {
+    opened,
+    open,
+    close,
+    autoHideDuration,
+    severity,
+    msg,
+  };
 }
 
 function TodoList() {
@@ -76,19 +85,16 @@ function TodoList() {
   const snackBarState = useNoticeSnackBarState();
   const todoOptionDrawerState = useTodoDrawerState();
 
-  const [open, setOpen] = useState(false);
   return (
     <>
-      <NoticeSnackBar snackBarState={snackBarState} />
-
-      <AppBar position="static" onClick={() => snackBarState.open("hi")}>
+      <AppBar position="static">
         <Toolbar className="justify-center">
           <div className="font-bold text-lg">TODOLIST</div>
         </Toolbar>
       </AppBar>
-      <NewTodoForm todosState={todosState} />
+      <NewTodoForm todosState={todosState} snackBarState={snackBarState} />
       <OptionDrawer todosState={todosState} state={todoOptionDrawerState} />
-
+      <NoticeSnackBar snackBarState={snackBarState} />
       <div className="mt-4 px-4 t-8">
         <ul>
           {todosState.todos.map((todo, i) => (

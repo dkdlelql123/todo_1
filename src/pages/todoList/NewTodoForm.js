@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 
-function NewTodoForm({ todosState }) {
+function NewTodoForm({ todosState, snackBarState }) {
   const submit = (e) => {
     e.preventDefault();
 
@@ -13,9 +13,11 @@ function NewTodoForm({ todosState }) {
       return;
     }
 
-    todosState.addTodo(form.content.value);
+    const newTodo = todosState.addTodo(form.content.value);
+
     form.content.value = "";
     form.content.focus();
+    snackBarState.open(`${newTodo.id}번 글이 등록되었습니다.`);
   };
 
   return (
