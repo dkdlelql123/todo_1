@@ -3,7 +3,7 @@ import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
-import { AppBar, Toolbar, Snackbar, Alert } from "@mui/material";
+import { AppBar, Toolbar, Snackbar, Alert, SliderMark } from "@mui/material";
 import NoticeSnackBar from "./NoticeSnackBar";
 
 function useTodosState() {
@@ -52,16 +52,36 @@ function useTodoDrawerState() {
   return { itemId, opened, close, open };
 }
 
+function useNoticeSnackBarState() {
+  const [opened, setOpened] = useState(false);
+  const [msg, setMsg] = useState();
+  const [severity, setSeverity] = useState();
+  const [autoHideDuration, setAutoHideDuration] = useState();
+  const open = (
+    msg = "메세지를 입력해주세요",
+    severity = "success",
+    duration = "3000"
+  ) => {
+    setOpened(true);
+    setMsg(msg);
+    setSeverity(severity);
+    setAutoHideDuration(duration);
+  };
+  const close = () => setOpened(false);
+  return { opened, msg, severity, autoHideDuration, open, close };
+}
+
 function TodoList() {
   const todosState = useTodosState();
+  const snackBarState = useNoticeSnackBarState();
   const todoOptionDrawerState = useTodoDrawerState();
 
   const [open, setOpen] = useState(false);
   return (
     <>
-      <NoticeSnackBar open={open} setOpen={setOpen} />
+      <NoticeSnackBar snackBarState={snackBarState} />
 
-      <AppBar position="static" onClick={() => setOpen(true)}>
+      <AppBar position="static" onClick={() => snackBarState.open("hi")}>
         <Toolbar className="justify-center">
           <div className="font-bold text-lg">TODOLIST</div>
         </Toolbar>

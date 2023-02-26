@@ -1,20 +1,19 @@
 import { useRef, useState, useMemo } from "react";
 import { Snackbar, Alert } from "@mui/material";
 
-function NoticeSnackBar({ open, setOpen }) {
+function NoticeSnackBar({ snackBarState }) {
   return (
     <>
       <Snackbar
-        open={open}
-        autoHideDuration={6000}
-        onClose={() => setOpen(false)}
+        open={snackBarState.open}
+        autoHideDuration={snackBarState.autoHideDuration}
+        onClose={snackBarState.onClose}
       >
         <Alert
-          onClose={() => setOpen(false)}
-          severity="success"
-          sx={{ width: "100%" }}
+          onClose={snackBarState.onClose}
+          severity={snackBarState.severity}
         >
-          This is a success message!
+          {snackBarState.msg}
         </Alert>
       </Snackbar>
     </>
