@@ -1,23 +1,19 @@
 import { useRef } from "react";
 import { atom, useRecoilState } from "recoil";
+import { recoilPersist } from "recoil-persist";
 import dateToStr from "../utils/dateForStr";
+
+const { persistAtom } = recoilPersist();
 
 const todosAtom = atom({
   key: "app/todosAtom",
-  default: [
-    {
-      regDate: "2023-02-26 20:40:00",
-      id: 3,
-      content: "명상",
-    },
-    { regDate: "2023-02-26 20:00:00", id: 2, content: "운동" },
-    { regDate: "2023-02-26 20:00:00", id: 1, content: "글쓰기" },
-  ],
+  default: [],
+  effects_UNSTABLE: [persistAtom],
 });
 
 const lastTodoIdAtom = atom({
   key: "app/lastTodoIdAtom",
-  default: 3,
+  default: 0,
 });
 
 export function TodosState() {

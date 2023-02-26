@@ -1,11 +1,9 @@
-import { useRef, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
-import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
 import { AppBar, Toolbar } from "@mui/material";
 import NoticeSnackBar from "./NoticeSnackBar";
-import { atom, useRecoilState } from "recoil";
 import { TodosState } from "../../states";
 
 function useTodoDrawerState() {
