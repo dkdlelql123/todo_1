@@ -12,9 +12,15 @@ const todosAtom = atom({
   default: [],
 });
 
+const lastTodoIdAtom = atom({
+  key: "app/lastTodoIdAtom",
+  default: 0,
+});
+
 function useTodosState() {
   const [todos, setTodos] = useRecoilState(todosAtom);
-  const lastTodoIdRef = useRef(0);
+  const [lastTodoId, setLastTodoId] = useRecoilState(lastTodoIdAtom);
+  const lastTodoIdRef = useRef(lastTodoId);
 
   const addTodo = (newContent) => {
     const id = ++lastTodoIdRef.current;

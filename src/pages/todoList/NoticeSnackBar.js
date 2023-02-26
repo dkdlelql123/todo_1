@@ -1,7 +1,6 @@
 import { Snackbar, Alert } from "@mui/material";
 
 function NoticeSnackBar({ snackBarState }) {
-  console.log(snackBarState);
   return (
     <>
       <Snackbar
