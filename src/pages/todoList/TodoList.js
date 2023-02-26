@@ -3,7 +3,7 @@ import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import dateToStr from "../../utils/dateForStr";
 import OptionDrawer from "./OptionDrawer";
-import { AppBar, Toolbar, Snackbar, Alert, SliderMark } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 import NoticeSnackBar from "./NoticeSnackBar";
 
 function useTodosState() {
@@ -62,8 +62,8 @@ function useNoticeSnackBarState() {
   const open = (msg, severity = "success", autoHideDuration = 1000) => {
     setOpened(true);
     setMsg(msg);
-    setSeverity(severity);
     setAutoHideDuration(autoHideDuration);
+    setSeverity(severity);
   };
 
   const close = () => {

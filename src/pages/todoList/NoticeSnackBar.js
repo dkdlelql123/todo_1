@@ -7,7 +7,7 @@ function NoticeSnackBar({ snackBarState }) {
       <Snackbar
         open={snackBarState.opened}
         autoHideDuration={snackBarState.autoHideDuration}
-        onClose={() => snackBarState.close}
+        onClose={snackBarState.close}
       >
         <Alert severity={snackBarState.severity}>{snackBarState.msg}</Alert>
       </Snackbar>
