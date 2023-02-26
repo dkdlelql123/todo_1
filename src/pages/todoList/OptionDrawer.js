@@ -43,7 +43,6 @@ function OptionDrawer({ state, snackBarState }) {
     <>
       <EditTodoModal
         drawerState={state}
-        //todosState={todosState}
         state={todoModalState}
         todo={todo}
         snackBarState={snackBarState}

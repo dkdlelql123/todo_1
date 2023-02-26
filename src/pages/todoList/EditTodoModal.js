@@ -1,12 +1,8 @@
 import { Modal, TextField, Button } from "@mui/material";
+import { TodosState } from "../../states";
 
-function EditTodoModal({
-  drawerState,
-  todosState,
-  state,
-  todo,
-  snackBarState,
-}) {
+function EditTodoModal({ drawerState, state, todo, snackBarState }) {
+  const todosStatus = TodosState();
   const submit = (e) => {
     e.preventDefault();
 
@@ -18,7 +14,7 @@ function EditTodoModal({
       return;
     }
 
-    todosState.modifyTodo(todo.id, form.content.value);
+    todosStatus.modifyTodo(todo.id, form.content.value);
 
     state.handleClose();
     drawerState.close();
