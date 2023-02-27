@@ -16,7 +16,11 @@ function TodoListItem({ todo, index, openDrawer }) {
             variant="outlined"
             color="primary"
             size="small"
-            label={todo.updateDate === "" ? todo.regDate : todo.updateDate}
+            label={
+              todo.updateDate === "" || todo.updateDate === null
+                ? todo.regDate
+                : todo.updateDate
+            }
           />
         </div>
 

@@ -7,17 +7,31 @@ const { persistAtom } = recoilPersist();
 
 const todosAtom = atom({
   key: "app/todosAtom",
-  default: [],
+  default: [
+    {
+      id: 2,
+      regDate: "2022-04-27 12:12:12",
+      content: "공부",
+      updateDate: "",
+    },
+    {
+      id: 1,
+      regDate: "2022-02-28 05:00:00",
+      content: "이불정리",
+      updateDate: "",
+    },
+  ],
   effects_UNSTABLE: [persistAtom],
 });
 
 const lastTodoIdAtom = atom({
   key: "app/lastTodoIdAtom",
-  default: 0,
+  default: 2,
 });
 
 export function TodosState() {
   const [todos, setTodos] = useRecoilState(todosAtom);
+  console.log(todos);
   const [lastTodoId, setLastTodoId] = useRecoilState(lastTodoIdAtom);
   const lastTodoIdRef = useRef(lastTodoId);
 
