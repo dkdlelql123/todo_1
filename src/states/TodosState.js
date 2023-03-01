@@ -3,7 +3,8 @@ import { atom, useRecoilState } from "recoil";
 import { recoilPersist } from "recoil-persist";
 import dateToStr from "../utils/dateForStr";
 
-const { persistAtom } = recoilPersist();
+const { persistAtom: persistAtomTodo } = recoilPersist();
+const { persistAtom: persistAtomLastId } = recoilPersist();
 
 const todosAtom = atom({
   key: "app/todosAtom",
@@ -21,17 +22,17 @@ const todosAtom = atom({
       updateDate: "",
     },
   ],
-  effects_UNSTABLE: [persistAtom],
+  effects_UNSTABLE: [persistAtomTodo],
 });
 
 const lastTodoIdAtom = atom({
   key: "app/lastTodoIdAtom",
   default: 2,
+  effects_UNSTABLE: [persistAtomLastId],
 });
 
 export function TodosState() {
   const [todos, setTodos] = useRecoilState(todosAtom);
-  console.log(todos);
   const [lastTodoId, setLastTodoId] = useRecoilState(lastTodoIdAtom);
   const lastTodoIdRef = useRef(lastTodoId);
 
