@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import EditTodoModal from "./EditTodoModal";
-import { TodosState } from "../../states";
+import { TodosState, NoticeSnackBarState } from "../../states";
 
 function useTodoModalState() {
   const [open, setOpen] = useState(false);
@@ -18,8 +18,9 @@ function useTodoModalState() {
   return { open, handleOpen, handleClose };
 }
 
-function OptionDrawer({ state, snackBarState }) {
+function OptionDrawer({ state }) {
   const todosStatus = TodosState();
+  const snackBarState = NoticeSnackBarState();
   const todoModalState = useTodoModalState();
 
   const removeTodo = () => {

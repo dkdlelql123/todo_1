@@ -1,6 +1,8 @@
 import { Snackbar, Alert } from "@mui/material";
+import { NoticeSnackBarState } from "../../states";
 
-function NoticeSnackBar({ snackBarState }) {
+function NoticeSnackBar() {
+  const snackBarState = NoticeSnackBarState();
   return (
     <>
       <Snackbar

@@ -1,9 +1,10 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { TodosState } from "../../states";
+import { TodosState, NoticeSnackBarState } from "../../states";
 
-function NewTodoForm({ snackBarState }) {
+function NewTodoForm() {
   const todosStatus = TodosState();
+  const snackBarState = NoticeSnackBarState();
   const submit = (e) => {
     e.preventDefault();
 
