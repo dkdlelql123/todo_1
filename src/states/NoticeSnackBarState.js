@@ -5,7 +5,7 @@ const noticeSnackbarInfoAtom = atom({
   default: {
     opened: false,
     autoHideDuration: 0,
-    severity: "",
+    severity: "success",
     msg: "",
   },
 });
