@@ -24,3 +24,9 @@
   height: 10px;
 }
 /* 스크롤바 꾸미기 끝 */
+
+
+#root .root{
+  display:flex;
+  flex-flow: column;
+}

@@ -13,7 +13,7 @@ function App() {
   const location = useLocation();
   return (
     <div className="bg-gray-300 min-h-screen">
-      <div className="w-1/2 max-w-screen-sm m-auto bg-white min-h-screen">
+      <div className="root w-1/2 max-w-screen-sm m-auto bg-white min-h-screen">
         <Routes>
           <Route path="/list" element={<ListPage />} />
           <Route path="/write" element={<WritePage />} />

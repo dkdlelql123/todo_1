@@ -8,26 +8,13 @@ const { persistAtom: persistAtomLastId } = recoilPersist();
 
 const todosAtom = atom({
   key: "app/todosAtom",
-  default: [
-    {
-      id: 2,
-      regDate: "2022-04-27 12:12:12",
-      content: "공부",
-      updateDate: "",
-    },
-    {
-      id: 1,
-      regDate: "2022-02-28 05:00:00",
-      content: "이불정리",
-      updateDate: "",
-    },
-  ],
+  default: [],
   effects_UNSTABLE: [persistAtomTodo],
 });
 
 const lastTodoIdAtom = atom({
   key: "app/lastTodoIdAtom",
-  default: 2,
+  default: 0,
   effects_UNSTABLE: [persistAtomLastId],
 });
 
