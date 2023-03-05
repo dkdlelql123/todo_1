@@ -23,7 +23,7 @@ export function TodosState() {
   const [lastTodoId, setLastTodoId] = useRecoilState(lastTodoIdAtom);
   const lastTodoIdRef = useRef(lastTodoId);
 
-  const addTodo = (newContent) => {
+  const addTodo = (newContent, newDueDate) => {
     const id = ++lastTodoIdRef.current;
     setLastTodoId(id);
 
@@ -32,7 +32,7 @@ export function TodosState() {
       content: newContent,
       regDate: dateToStr(new Date()),
       updateDate: "",
-      dueDate: "",
+      dueDate: newDueDate,
     };
 
     setTodos([newTodo, ...todos]);

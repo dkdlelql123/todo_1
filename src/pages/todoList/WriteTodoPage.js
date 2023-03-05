@@ -22,14 +22,20 @@ function WriteTodoPage() {
     e.preventDefault();
 
     let form = e.target;
-    form.content.value = form.content.value.trim();
 
-    if (form.content.value.length === 0) {
+    let dueDate = form.dueDate.value.trim();
+    if (dueDate.length === 0) {
+      alert("마감일을 입력해주세요");
+      return;
+    }
+
+    let content = form.content.value.trim();
+    if (content.length === 0) {
       alert("할일을 입력해주세요");
       return;
     }
 
-    const newTodo = todosStatus.addTodo(form.content.value);
+    const newTodo = todosStatus.addTodo(content, dueDate);
 
     form.content.value = "";
     form.content.focus();
