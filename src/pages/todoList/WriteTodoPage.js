@@ -1,11 +1,12 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { useNavigate } from "react-router-dom";
 import { TodosState, NoticeSnackBarState } from "../../states";
 
 function WriteTodoPage() {
   const todosStatus = TodosState();
   const snackBarState = NoticeSnackBarState();
-
+  const navigate = useNavigate();
   const submit = (e) => {
     e.preventDefault();
 
@@ -22,6 +23,7 @@ function WriteTodoPage() {
     form.content.value = "";
     form.content.focus();
     snackBarState.open(`${newTodo.id}번 글이 등록되었습니다.`);
+    navigate(`/todoList`);
   };
 
   return (
