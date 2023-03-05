@@ -2,21 +2,15 @@ import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { useNavigate } from "react-router-dom";
 import { TodosState, NoticeSnackBarState } from "../../states";
+import dateToStr from "../../utils/dateForStr";
 
 function WriteTodoPage() {
   const todosStatus = TodosState();
   const snackBarState = NoticeSnackBarState();
   const navigate = useNavigate();
 
-  // 2020.10.10.
-  const dateFmtKr = new Intl.DateTimeFormat("kr").format(Date.now());
-
   // 2020-10-10
-  const dateFmt = Intl.DateTimeFormat("fr-CA", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-  }).format(Date.now());
+  const dateFmt = dateToStr(new Date());
 
   const submit = (e) => {
     e.preventDefault();
