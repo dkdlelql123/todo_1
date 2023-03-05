@@ -44,6 +44,7 @@ function WriteTodoPage() {
           type="date"
           id="dueDate"
           placeholder="마감일을 입력해주세요."
+          inputProps={{ min: dateFmt }}
         ></TextField>
         <TextField
           rows={4}
