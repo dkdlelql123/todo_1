@@ -5,19 +5,27 @@ import {
   Routes,
   useLocation,
 } from "react-router-dom";
-import ListPage from "./pages/ListPage";
 import TodoListPage from "./pages/TodoListPage";
 import WriteTodoPage from "./pages/todoList/WriteTodoPage";
 import { AppBar, Toolbar } from "@mui/material";
 
 function App() {
   const location = useLocation();
+
   return (
     <div className="bg-gray-300 min-h-screen">
       <div className="root w-1/2 max-w-screen-sm m-auto bg-white min-h-screen">
         <AppBar position="static">
-          <Toolbar className="justify-center">
+          <Toolbar className="flex justify-around">
+            <div className="flex-1"></div>
             <div className="font-bold text-lg">TODOLIST</div>
+            <div className="flex-1 text-right text-sm">
+              {location.pathname === "/writeTodo" ? (
+                <NavLink to="/todoList">목록으로</NavLink>
+              ) : (
+                <NavLink to="/writeTodo">글쓰기</NavLink>
+              )}
+            </div>
           </Toolbar>
         </AppBar>
 
