@@ -2,7 +2,7 @@ import { Button } from "@mui/material";
 import { TodosState } from "../../states";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function TodoList({ todoOptionDrawerState }) {
   const todosState = TodosState();
@@ -25,7 +25,7 @@ function TodoList({ todoOptionDrawerState }) {
         </>
       ) : (
         <>
-          <NewTodoForm />
+          {/* <NewTodoForm /> */}
           <div className="mt-4 px-4 t-8">
             <ul>
               {todosState.todos.map((todo, i) => (

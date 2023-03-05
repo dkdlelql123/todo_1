@@ -7,6 +7,17 @@ function WriteTodoPage() {
   const todosStatus = TodosState();
   const snackBarState = NoticeSnackBarState();
   const navigate = useNavigate();
+
+  // 2020.10.10.
+  const dateFmtKr = new Intl.DateTimeFormat("kr").format(Date.now());
+
+  // 2020-10-10
+  const dateFmt = Intl.DateTimeFormat("fr-CA", {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  }).format(Date.now());
+
   const submit = (e) => {
     e.preventDefault();
 
@@ -29,6 +40,11 @@ function WriteTodoPage() {
   return (
     <>
       <form onSubmit={submit} className="flex flex-col mt-4 px-4 gap-2">
+        <TextField
+          type="date"
+          id="dueDate"
+          placeholder="마감일을 입력해주세요."
+        ></TextField>
         <TextField
           rows={4}
           id="content"

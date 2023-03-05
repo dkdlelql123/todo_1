@@ -32,6 +32,7 @@ export function TodosState() {
       content: newContent,
       regDate: dateToStr(new Date()),
       updateDate: "",
+      dueDate: "",
     };
 
     setTodos([newTodo, ...todos]);
