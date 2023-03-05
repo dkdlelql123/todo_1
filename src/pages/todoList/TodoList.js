@@ -1,32 +1,14 @@
-import { useState, useMemo } from "react";
-import { AppBar, Toolbar, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { TodosState } from "../../states";
 import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
-import OptionDrawer from "./OptionDrawer";
-import NoticeSnackBar from "./NoticeSnackBar";
+import { Link, NavLink } from "react-router-dom";
 
-function useTodoDrawerState() {
-  const [itemId, setItemId] = useState(null);
-  const opened = useMemo(() => itemId !== null, [itemId]);
-  const close = () => setItemId(null);
-  const open = (id) => setItemId(id);
-  return { itemId, opened, close, open };
-}
-
-function TodoList() {
+function TodoList({ todoOptionDrawerState }) {
   const todosState = TodosState();
-  const todoOptionDrawerState = useTodoDrawerState();
 
   return (
     <>
-      <AppBar position="static">
-        <Toolbar className="justify-center">
-          <div className="font-bold text-lg">TODOLIST</div>
-        </Toolbar>
-      </AppBar>
-      <OptionDrawer state={todoOptionDrawerState} />
-      <NoticeSnackBar />
       {todosState.todos.length === 0 ? (
         <>
           <div className="flex flex-1 flex-col gap-2 justify-center items-center ">
@@ -36,7 +18,7 @@ function TodoList() {
               </span>
               을 입력해주세요.
             </div>
-            <Button variant="contained" className="w-[180px]">
+            <Button variant="contained" component={NavLink} to={"/writeTodo"}>
               <div>할일 작성하기</div>
             </Button>
           </div>
