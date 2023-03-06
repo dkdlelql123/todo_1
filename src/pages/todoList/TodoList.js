@@ -2,10 +2,37 @@ import { Button } from "@mui/material";
 import { TodosState } from "../../states";
 import TodoListItem from "./TodoListItem";
 import { NavLink } from "react-router-dom";
+import { Tab, Tabs } from "@mui/material";
+import { useState } from "react";
 
 function TodoList({ todoOptionDrawerState }) {
   const todosState = TodosState();
   const onCompletedBtnClick = (id) => todosState.toggleCompletedById(id);
+
+  const [currentTab, clickTab] = useState(0);
+  const menuArr = [
+    { name: "all", value: 0, option: "all" },
+    { name: "미완료", value: -1, option: "notComplete" },
+    { name: "완료", value: 1, option: "complete" },
+  ];
+
+  const getFilterTodos = () => {
+    if (currentTab === -1) {
+      return todosState.todos.filter((todo, _i) => todo.completed !== true);
+    } else if (currentTab === 1) {
+      return todosState.todos.filter((todo, _i) => todo.completed === true);
+    }
+
+    return todosState.todos;
+  };
+
+  const filteredTodos = getFilterTodos();
+
+  const selectMenuHandler = (index) => {
+    // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
+    // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
+    currentTab !== index && clickTab(index);
+  };
 
   return (
     <>
@@ -26,9 +53,20 @@ function TodoList({ todoOptionDrawerState }) {
       ) : (
         <>
           {/* <NewTodoForm /> */}
+
+          <Tabs value={currentTab} centered>
+            {menuArr.map((menu, _idx) => (
+              <Tab
+                key={_idx}
+                label={menu.name}
+                value={menu.value}
+                onClick={() => selectMenuHandler(menu.value)}
+              />
+            ))}
+          </Tabs>
           <div className="mt-4 px-4 t-8">
             <ul>
-              {todosState.todos.map((todo, i) => (
+              {filteredTodos.map((todo, i) => (
                 <TodoListItem
                   key={i}
                   todo={todo}
