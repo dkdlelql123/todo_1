@@ -1,11 +1,11 @@
 import { Button } from "@mui/material";
 import { TodosState } from "../../states";
-import NewTodoForm from "./NewTodoForm";
 import TodoListItem from "./TodoListItem";
 import { NavLink } from "react-router-dom";
 
 function TodoList({ todoOptionDrawerState }) {
   const todosState = TodosState();
+  const onCompletedBtnClick = (id) => todosState.toggleCompletedById(id);
 
   return (
     <>
@@ -34,6 +34,7 @@ function TodoList({ todoOptionDrawerState }) {
                   todo={todo}
                   index={i}
                   openDrawer={todoOptionDrawerState.open}
+                  onCompletedBtnClick={onCompletedBtnClick}
                 />
               ))}
             </ul>

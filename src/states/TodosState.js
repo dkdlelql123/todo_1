@@ -30,6 +30,7 @@ export function TodosState() {
     const newTodo = {
       id,
       content: newContent,
+      completed: false,
       regDate: dateToStr(new Date()),
       updateDate: "",
       dueDate: newDueDate,
@@ -58,5 +59,24 @@ export function TodosState() {
     if (index === -1) return null;
     return todos[index];
   };
-  return { todos, addTodo, modifyTodo, removeTodo, findTodoById };
+
+  const toggleCompletedById = (id) => {
+    const index = findTodoIndexById(id);
+    if (index === -1) return null;
+    console.log(index);
+
+    const newTodos = todos.map((todo, i) =>
+      i !== index ? todo : { ...todo, completed: !todo.completed }
+    );
+    setTodos(newTodos);
+  };
+
+  return {
+    todos,
+    addTodo,
+    modifyTodo,
+    removeTodo,
+    findTodoById,
+    toggleCompletedById,
+  };
 }
