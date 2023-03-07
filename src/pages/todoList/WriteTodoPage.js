@@ -36,7 +36,7 @@ function WriteTodoPage() {
 
     let msg = "";
     if (todo !== null) {
-      todosStatus.modifyTodo(todo.id, content);
+      todosStatus.modifyTodo(todo.id, content, dueDate);
       msg = `${todo.id}번 글이 수정되었습니다.`;
     } else {
       const newTodo = todosStatus.addTodo(content, dueDate);

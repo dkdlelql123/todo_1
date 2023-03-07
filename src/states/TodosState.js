@@ -39,11 +39,16 @@ export function TodosState() {
     setTodos([newTodo, ...todos]);
     return newTodo;
   };
-  const modifyTodo = (editId, newContent) => {
+  const modifyTodo = (editId, editContent, editDueDate) => {
     const newTodos = todos.map((todo, i) =>
       todo.id !== editId
         ? todo
-        : { ...todo, content: newContent, updateDate: dateToStr(new Date()) }
+        : {
+            ...todo,
+            content: editContent,
+            updateDate: dateToStr(new Date()),
+            dueDate: editDueDate,
+          }
     );
     setTodos(newTodos);
   };
