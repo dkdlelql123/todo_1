@@ -20,7 +20,7 @@ export function NoticeSnackBarState() {
   const severity = noticeSnackbarInfo.severity;
   const msg = noticeSnackbarInfo.msg;
 
-  const open = (msg, severity = "success", autoHideDuration = 1000) => {
+  const open = (msg, severity = "success", autoHideDuration = 3000) => {
     setNoticeSnackbarInfo({
       opened: true,
       msg,

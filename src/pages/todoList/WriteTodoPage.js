@@ -1,5 +1,6 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { TodosState, NoticeSnackBarState } from "../../states";
 import dateToStr from "../../utils/dateForStr";
@@ -11,9 +12,7 @@ function WriteTodoPage() {
   const snackBarState = NoticeSnackBarState();
   // 2020-10-10
   const dateFmt = dateToStr(new Date());
-
   let todo = null;
-
   if (id !== null && id !== undefined) {
     todo = todosStatus.findTodoById(id);
   }
@@ -35,11 +34,18 @@ function WriteTodoPage() {
       return;
     }
 
-    const newTodo = todosStatus.addTodo(content, dueDate);
+    let msg = "";
+    if (todo !== null) {
+      todosStatus.modifyTodo(todo.id, content);
+      msg = `${todo.id}번 글이 수정되었습니다.`;
+    } else {
+      const newTodo = todosStatus.addTodo(content, dueDate);
+      msg = `${newTodo.id}번 글이 등록되었습니다.`;
+    }
 
     form.content.value = "";
     form.content.focus();
-    snackBarState.open(`${newTodo.id}번 글이 등록되었습니다.`);
+    snackBarState.open(msg);
     navigate(`/todoList`);
   };
 
