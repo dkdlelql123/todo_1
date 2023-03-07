@@ -52,10 +52,13 @@ export function TodosState() {
     setTodos(newTodos);
   };
   const findTodoIndexById = (id) => {
+    //console.log(todos);
     return todos.findIndex((todo) => todo.id === id);
   };
   const findTodoById = (id) => {
+    if (typeof id != "number") id = parseInt(id);
     const index = findTodoIndexById(id);
+    //console.log("index:" + index);
     if (index === -1) return null;
     return todos[index];
   };
@@ -76,6 +79,7 @@ export function TodosState() {
     addTodo,
     modifyTodo,
     removeTodo,
+    findTodoIndexById,
     findTodoById,
     toggleCompletedById,
   };

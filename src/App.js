@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import TodoListPage from "./pages/TodoListPage";
 import WriteTodoPage from "./pages/todoList/WriteTodoPage";
-import { AppBar, Toolbar, Tabs, Tab, TabPanel } from "@mui/material";
+import { AppBar, Toolbar } from "@mui/material";
 
 function App() {
   const location = useLocation();
@@ -32,6 +32,7 @@ function App() {
         <Routes>
           {/* <Route path="/list" element={<ListPage />} /> */}
           <Route path="/writeTodo" element={<WriteTodoPage />} />
+          <Route path="/edit/:id" element={<WriteTodoPage />} />
           <Route path="/todoList" element={<TodoListPage />} />
           <Route path="*" element={<Navigate to="/todoList" />} />
         </Routes>

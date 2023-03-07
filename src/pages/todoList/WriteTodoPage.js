@@ -1,16 +1,22 @@
 import { Button } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { TodosState, NoticeSnackBarState } from "../../states";
 import dateToStr from "../../utils/dateForStr";
 
 function WriteTodoPage() {
+  const { id } = useParams();
+  const navigate = useNavigate();
   const todosStatus = TodosState();
   const snackBarState = NoticeSnackBarState();
-  const navigate = useNavigate();
-
   // 2020-10-10
   const dateFmt = dateToStr(new Date());
+
+  let todo = null;
+
+  if (id !== null && id !== undefined) {
+    todo = todosStatus.findTodoById(id);
+  }
 
   const submit = (e) => {
     e.preventDefault();
@@ -37,6 +43,9 @@ function WriteTodoPage() {
     navigate(`/todoList`);
   };
 
+  console.log("id " + id);
+  console.log(todo);
+
   return (
     <>
       <form onSubmit={submit} className="flex flex-col mt-4 px-4 gap-2">
@@ -44,14 +53,15 @@ function WriteTodoPage() {
           type="date"
           id="dueDate"
           placeholder="마감일을 입력해주세요."
-          defaultValue={dateFmt}
           inputProps={{ min: dateFmt }}
+          defaultValue={todo !== null ? todo?.dueDate : dateFmt}
         ></TextField>
         <TextField
           rows={4}
           id="content"
           label="todo"
           placeholder="할일을 입력해주세요."
+          defaultValue={todo?.content}
           multiline
         />
         <Button type="submit" variant="contained">

@@ -10,6 +10,7 @@ import { faTrashAlt, faEdit } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import EditTodoModal from "./EditTodoModal";
 import { TodosState, NoticeSnackBarState } from "../../states";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function useTodoModalState() {
   const [open, setOpen] = useState(false);
@@ -23,6 +24,8 @@ function OptionDrawer({ state }) {
   const snackBarState = NoticeSnackBarState();
   const todoModalState = useTodoModalState();
 
+  const navigate = useNavigate();
+
   const removeTodo = () => {
     if (
       window.confirm(`${state.itemId}번 할일을 삭제하시겠습니까?`) === false
@@ -35,7 +38,8 @@ function OptionDrawer({ state }) {
   };
 
   const editTodo = () => {
-    todoModalState.handleOpen();
+    //todoModalState.handleOpen();
+    navigate(`/edit/${state.itemId}`);
   };
 
   const todo = todosStatus.findTodoById(state.itemId);
@@ -69,7 +73,9 @@ function OptionDrawer({ state }) {
           <Divider />
           <ListItemButton
             className={`flex items-baseline gap-4 !text-[color:var(--mui-color-grey-700)]`}
-            onClick={editTodo}
+            //onClick={editTodo}
+            component={NavLink}
+            to={`/edit/${todo?.id}`}
           >
             <FontAwesomeIcon icon={faEdit} />
             <ListItemText>수정</ListItemText>
