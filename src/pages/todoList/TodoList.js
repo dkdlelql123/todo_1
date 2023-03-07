@@ -18,7 +18,7 @@ function TodoList({ todoOptionDrawerState }) {
 
   const getFilterTodos = () => {
     if (currentTab === -1) {
-      return todosState.todos.filter((todo, _i) => todo.completed !== true);
+      return todosState.todos.filter((todo, _i) => todo.completed === false);
     } else if (currentTab === 1) {
       return todosState.todos.filter((todo, _i) => todo.completed === true);
     }
@@ -54,7 +54,7 @@ function TodoList({ todoOptionDrawerState }) {
         <>
           {/* <NewTodoForm /> */}
 
-          <Tabs value={currentTab} centered>
+          <Tabs value={currentTab} centered variant="fullWidth">
             {menuArr.map((menu, _idx) => (
               <Tab
                 key={_idx}
