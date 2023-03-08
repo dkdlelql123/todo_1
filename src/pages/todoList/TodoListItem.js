@@ -10,18 +10,9 @@ function TodoListItem({ todo, index, openDrawer, onCompletedBtnClick }) {
           <Chip variant="outlined" size="small" label={`번호 : ${todo.id}`} />
           <Chip
             variant="outlined"
-            size="small"
-            label={
-              todo.updateDate === "" || todo.updateDate === null
-                ? todo.regDate
-                : todo.updateDate
-            }
-          />
-          <Chip
-            variant="outlined"
             color="primary"
             size="small"
-            label={`마감일 : ${todo.dueDate}`}
+            label={todo.dueDate}
           />
         </div>
 

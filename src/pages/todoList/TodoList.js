@@ -28,6 +28,11 @@ function TodoList({ todoOptionDrawerState }) {
 
   const filteredTodos = getFilterTodos();
 
+  const sortedTodos = [...filteredTodos].sort((a, b) => {
+    if (a.dueDate === b.dueDate) return 0;
+    return a.dueDate > b.dueDate ? 1 : -1;
+  });
+
   const selectMenuHandler = (index) => {
     // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
     // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
@@ -66,7 +71,7 @@ function TodoList({ todoOptionDrawerState }) {
           </Tabs>
           <div className="mt-4 px-4 t-8">
             <ul>
-              {filteredTodos.map((todo, i) => (
+              {sortedTodos.map((todo, i) => (
                 <TodoListItem
                   key={i}
                   todo={todo}
