@@ -1,9 +1,17 @@
-import { Button } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import { TodosState } from "../../states";
 import TodoListItem from "./TodoListItem";
 import { NavLink } from "react-router-dom";
 import { Tab, Tabs } from "@mui/material";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsV } from "@fortawesome/free-solid-svg-icons";
 
 function TodoList({ todoOptionDrawerState }) {
   const todosState = TodosState();
@@ -16,22 +24,34 @@ function TodoList({ todoOptionDrawerState }) {
     { name: "완료", value: 1, option: "complete" },
   ];
 
+  const [sort, setSort] = useState(true); // true 마감순 false 등록일자순
+
   const getFilterTodos = () => {
     if (currentTab === -1) {
       return todosState.todos.filter((todo, _i) => todo.completed === false);
     } else if (currentTab === 1) {
       return todosState.todos.filter((todo, _i) => todo.completed === true);
     }
-
     return todosState.todos;
   };
 
   const filteredTodos = getFilterTodos();
 
-  const sortedTodos = [...filteredTodos].sort((a, b) => {
-    if (a.dueDate === b.dueDate) return 0;
-    return a.dueDate > b.dueDate ? 1 : -1;
-  });
+  function getSortedTodos() {
+    if (sort === true) {
+      return [...filteredTodos].sort((a, b) => {
+        if (a.dueDate === b.dueDate) return 0;
+        return a.dueDate > b.dueDate ? 1 : -1;
+      });
+    } else {
+      return [...filteredTodos].sort((a, b) => {
+        if (a.dueDate === b.dueDate) return 0;
+        return a.dueDate < b.dueDate ? 1 : -1;
+      });
+    }
+  }
+
+  const sortedTodos = getSortedTodos();
 
   const selectMenuHandler = (index) => {
     // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
@@ -69,6 +89,18 @@ function TodoList({ todoOptionDrawerState }) {
               />
             ))}
           </Tabs>
+
+          <div className="m-4 flex flex-row-reverse">
+            <span
+              className="border rounded p-1 px-2 border-[color:var(--mui-color-primary-main)] text-sm text-[color:var(--mui-color-primary-main)] cursor-pointer"
+              onClick={() => setSort(!sort)}
+            >
+              {sort === true && "마감일순"}
+              {sort === false && "등록일순"}
+              &nbsp;
+              <FontAwesomeIcon icon={faArrowsV} />
+            </span>
+          </div>
           <div className="mt-4 px-4 t-8">
             <ul>
               {sortedTodos.map((todo, i) => (
