@@ -20,7 +20,7 @@ function App() {
             <div className="flex-1"></div>
             <div className="font-bold text-lg">TODOLIST</div>
             <div className="flex-1 text-right text-sm">
-              {location.pathname === "/writeTodo" ? (
+              {location.pathname !== "/todoList" ? (
                 <NavLink to="/todoList">목록으로</NavLink>
               ) : (
                 <NavLink to="/writeTodo">글쓰기</NavLink>
