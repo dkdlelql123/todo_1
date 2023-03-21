@@ -101,7 +101,7 @@ function TodoList({ todoOptionDrawerState }) {
               <FontAwesomeIcon icon={faArrowsV} />
             </span>
           </div>
-          <div className="mt-4 px-4 t-8">
+          <div className=" px-4 t-8">
             <ul>
               {sortedTodos.map((todo, i) => (
                 <TodoListItem

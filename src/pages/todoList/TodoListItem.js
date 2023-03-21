@@ -5,7 +5,7 @@ import { faCheck, faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 function TodoListItem({ todo, index, openDrawer, onCompletedBtnClick }) {
   return (
     <>
-      <li className="flex flex-col gap-2 mt-10">
+      <li className="flex flex-col gap-2 mt-4">
         <div className="flex gap-2 items-center">
           <Chip variant="outlined" size="small" label={`번호 : ${todo.id}`} />
           <Chip

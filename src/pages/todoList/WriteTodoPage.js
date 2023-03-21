@@ -71,7 +71,9 @@ function WriteTodoPage() {
           multiline
         />
         <Button type="submit" variant="contained">
-          <div className="font-bold">작성</div>
+          <div className="font-bold">
+            {todo !== null ? todo.id + "번 할잀수정" : "작성"}
+          </div>
         </Button>
       </form>
     </>
