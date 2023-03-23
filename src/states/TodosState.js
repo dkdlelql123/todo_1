@@ -67,7 +67,6 @@ export function TodosState() {
     if (index === -1) return null;
     return todos[index];
   };
-
   const toggleCompletedById = (id) => {
     const index = findTodoIndexById(id);
     if (index === -1) return null;

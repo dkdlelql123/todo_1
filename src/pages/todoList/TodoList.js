@@ -12,24 +12,36 @@ import { Tab, Tabs } from "@mui/material";
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowsV } from "@fortawesome/free-solid-svg-icons";
+import { atom, useRecoilState } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom: persistAtomCurrentTab } = recoilPersist();
+const currentTabAtom = atom({
+  key: "app/currentTabAtom",
+  default: 0,
+  effects_UNSTABLE: [persistAtomCurrentTab],
+});
+
+const menuArr = [
+  { name: "all", value: 0, option: "all" },
+  { name: "미완료", value: -1, option: "notComplete" },
+  { name: "완료", value: 1, option: "complete" },
+];
 
 function TodoList({ todoOptionDrawerState }) {
+  const [currentTab, setCurrentTab] = useRecoilState(currentTabAtom);
+
   const todosState = TodosState();
   const onCompletedBtnClick = (id) => todosState.toggleCompletedById(id);
-
-  const [currentTab, clickTab] = useState(0);
-  const menuArr = [
-    { name: "all", value: 0, option: "all" },
-    { name: "미완료", value: -1, option: "notComplete" },
-    { name: "완료", value: 1, option: "complete" },
-  ];
 
   const [sort, setSort] = useState(true); // true 마감순 false 등록일자순
 
   const getFilterTodos = () => {
     if (currentTab === -1) {
+      // 미완료
       return todosState.todos.filter((todo, _i) => todo.completed === false);
     } else if (currentTab === 1) {
+      // 완료
       return todosState.todos.filter((todo, _i) => todo.completed === true);
     }
     return todosState.todos;
@@ -53,10 +65,16 @@ function TodoList({ todoOptionDrawerState }) {
 
   const sortedTodos = getSortedTodos();
 
+  /**
+   * @param index : number ( -1 ~ 1 )
+   * 0 : all,
+   * -1 : not complete,
+   * 1 : complete
+   */
   const selectMenuHandler = (index) => {
     // parameter로 현재 선택한 인덱스 값을 전달해야 하며, 이벤트 객체(event)는 쓰지 않는다
     // 해당 함수가 실행되면 현재 선택된 Tab Menu 가 갱신.
-    currentTab !== index && clickTab(index);
+    currentTab !== index && setCurrentTab(index);
   };
 
   return (
