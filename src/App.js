@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="bg-gray-300 min-h-screen">
-      <div className="root w-1/2 max-w-screen-sm m-auto bg-white min-h-screen">
+      <div className="root lg:w-1/2 sm:w-full max-w-screen-sm m-auto bg-white min-h-screen">
         <AppBar position="static">
           <Toolbar className="flex justify-around">
             <div className="flex-1"></div>
@@ -36,6 +36,9 @@ function App() {
           <Route path="/todoList" element={<TodoListPage />} />
           <Route path="*" element={<Navigate to="/todoList" />} />
         </Routes>
+
+        {/* 화면이 아래에 닿지 않도록 */}
+        <div className="min-h-[200px]"></div>
 
         {location.pathname.split("/")[1] === "main" && (
           <footer className="pt-2 flex items-center gap-2">
