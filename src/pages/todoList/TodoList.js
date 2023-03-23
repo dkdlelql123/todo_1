@@ -18,14 +18,14 @@ import { recoilPersist } from "recoil-persist";
 const { persistAtom: persistAtomCurrentTab } = recoilPersist();
 const currentTabAtom = atom({
   key: "app/currentTabAtom",
-  default: 0,
+  default: -1,
   effects_UNSTABLE: [persistAtomCurrentTab],
 });
 
 const menuArr = [
-  { name: "all", value: 0, option: "all" },
   { name: "미완료", value: -1, option: "notComplete" },
   { name: "완료", value: 1, option: "complete" },
+  { name: "all", value: 0, option: "all" },
 ];
 
 function TodoList({ todoOptionDrawerState }) {
