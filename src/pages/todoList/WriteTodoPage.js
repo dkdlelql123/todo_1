@@ -72,7 +72,7 @@ function WriteTodoPage() {
         />
         <Button type="submit" variant="contained">
           <div className="font-bold">
-            {todo !== null ? todo.id + "번 할잀수정" : "작성"}
+            {todo !== null ? todo.id + "번 할일수정" : "작성"}
           </div>
         </Button>
       </form>

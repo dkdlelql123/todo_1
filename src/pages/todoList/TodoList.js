@@ -1,10 +1,4 @@
-import {
-  Button,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Button } from "@mui/material";
 import { TodosState } from "../../states";
 import TodoListItem from "./TodoListItem";
 import { NavLink } from "react-router-dom";
